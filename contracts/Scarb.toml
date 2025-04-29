@@ -1,0 +1,23 @@
+[package]
+name = "grid_game"
+version = "0.1.0"
+edition = "2023_11"
+
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest.html
+
+[dependencies]
+starknet = ">=2.6.4"
+openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", tag = "v0.14.0" }
+wadray = { git = "https://github.com/lindy-labs/wadray.git" }
+alexandria_merkle_tree = { git = "https://github.com/keep-starknet-strange/alexandria.git", tag="cairo-v2.6.0" }
+
+
+[[target.starknet-contract]]
+sierra = true
+casm = true
+casm-add-pythonic-hints = true
+
+[lib]
+sierra = true
+casm = false
+

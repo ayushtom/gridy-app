@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "rootDir": "./",
+    "outDir": "./.ts-node",
+    "module": "commonjs",
+    "strict": true,
+    "declaration": false,
+    "sourceMap": true,
+    "inlineSources": true,
+    "types": ["node"],
+    "stripInternal": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "inlineSourceMap": false,
+    "noEmit": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  }
+}

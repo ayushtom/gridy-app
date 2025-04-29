@@ -1,0 +1,1 @@
+{"version":1,"contracts":[{"id":"c08estfls8dn4","package_name":"grid_game","contract_name":"GridGame","module_path":"grid_game::main::GridGame","artifacts":{"sierra":"grid_game_GridGame.contract_class.json","casm":"grid_game_GridGame.compiled_contract_class.json"}}]}

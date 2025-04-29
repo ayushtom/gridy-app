@@ -1,0 +1,72 @@
+services:
+  etcd:
+    image: docker.io/bitnami/etcd:3.5
+    environment:
+      ALLOW_NONE_AUTHENTICATION: "yes"
+    volumes:
+      - etcd_data:/bitnami/etcd
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    image: api:latest
+    container_name: nodejs-api
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    ports:
+      - 3001:3001
+    volumes:
+      - ./api:/usr/src/app
+      - /usr/src/app/node_modules
+
+  stream:
+    build:
+      context: ./stream
+      dockerfile: Dockerfile
+    image: stream:latest
+    container_name: nodejs-stream
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    ports:
+      - 3002:3002
+    volumes:
+      - ./stream:/usr/src/app
+      - /usr/src/app/node_modules
+
+  indexer:
+    image: quay.io/apibara/sink-mongo:0.7.0
+    depends_on:
+      - etcd
+    restart: always
+    ports:
+      - "8005:8005"
+    command:
+      - run
+      - --allow-env=/data/.env
+      - /data/src/script.ts
+      - --status-server-address=0.0.0.0:8005
+    volumes:
+      - ./indexer:/data/
+    environment:
+      PERSIST_TO_ETCD: http://etcd:2379
+      SINK_ID: indexer_v0
+      AUTH_TOKEN: ${AUTH_TOKEN}
+
+  nginx:
+    image: valian/docker-nginx-auto-ssl
+    restart: on-failure
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ssl_data:/etc/resty-auto-ssl
+    environment:
+      ALLOWED_DOMAINS: "(api|stream).gridy.fun"
+      SITES: "api.gridy.fun=nodejs-api:3001;stream.gridy.fun=nodejs-stream:3002"
+
+volumes:
+  etcd_data:
+  ssl_data:

@@ -1,62 +1,39 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".github/mark-dark.svg">
-  <img alt="Dojo logo" align="right" width="120" src=".github/mark-light.svg">
-</picture>
+<body>
+  <h1>3D Minesweeper on Starknet</h1>
 
-<a href="https://twitter.com/dojostarknet">
-<img src="https://img.shields.io/twitter/follow/dojostarknet?style=social"/>
-</a>
-<a href="https://github.com/dojoengine/dojo">
-<img src="https://img.shields.io/github/stars/dojoengine/dojo?style=social"/>
-</a>
 
-[![discord](https://img.shields.io/badge/join-dojo-green?logo=discord&logoColor=white)](https://discord.gg/PwDa2mKhR4)
-[![Telegram Chat][tg-badge]][tg-url]
 
-[tg-badge]: https://img.shields.io/endpoint?color=neon&logo=telegram&label=chat&style=flat-square&url=https%3A%2F%2Ftg.sumanjay.workers.dev%2Fdojoengine
-[tg-url]: https://t.me/dojoengine
 
-# Dojo Starter: Official Guide
+https://github.com/user-attachments/assets/3e9b82ee-d840-41de-a8c4-6ae8f5c7cfa3
 
-The official Dojo Starter guide, the quickest and most streamlined way to get your Dojo provable game up and running. This guide will assist you with the initial setup, from cloning the repository to deploying your world.
 
-Read the full tutorial [here](https://book.dojoengine.org/tutorial/dojo-starter).
+  <h2>Overview</h2>
+  <p>
+    A <strong>3D Minesweeper</strong> game built on the <strong>Starknet blockchain</strong>! 
+    The game challenges players to find hidden <strong>gemstones</strong> whose locations are securely concealed using <strong>Merkle Trees</strong> on-chain.
+  </p>
 
-## Running Locally
 
-#### Terminal one (Make sure this is running)
-```bash
-# Run Katana
-katana --disable-fee --allowed-origins "*"
-```
+  <h2>Built With</h2>
+  <ul>
+    <li><strong>Cairo</strong> (for Starknet smart contracts)</li>
+    <li><strong>React Three Fiber</strong> (for immersive 3D rendering)</li>
+    <li><strong>Node.js</strong> (for backend services)</li>
+    <li><strong>MongoDB and Deno</strong> (for indexing the blockchain)</li>
+  </ul>
 
-#### Terminal two
-```bash
-# Build the example
-sozo build
+  <h2>Gameplay</h2>
+  <ul>
+    <li>Explore a dynamic 3D grid.</li>
+    <li>Strategically uncover tiles to find hidden gemstones.</li>
+    <li>Gemstone locations are committed on-chain using <strong>Merkle Trees</strong>, ensuring fairness and transparency.</li>
+  </ul>
 
-# Migrate the example
-sozo migrate apply
+  <h2>Features</h2>
+  <ul>
+    <li>Fully decentralized gemstone verification.</li>
+    <li>Real-time 3D gameplay experience.</li>
+    <li>Secure, tamper-proof hidden item logic via blockchain cryptography.</li>
+  </ul>
 
-# Start Torii
-torii --world 0x70835f8344647b1e573fe7aeccbf044230089eb19624d3c7dea4080f5dcb025 --allowed-origins "*"
-```
-
----
-
-## Contribution
-
-This starter project is a constant work in progress and contributions are greatly appreciated!
-
-1. **Report a Bug**
-
-   - If you think you have encountered a bug, and we should know about it, feel free to report it [here](https://github.com/dojoengine/dojo-starter/issues) and we will take care of it.
-
-2. **Request a Feature**
-
-   - You can also request for a feature [here](https://github.com/dojoengine/dojo-starter/issues), and if it's viable, it will be picked for development.
-
-3. **Create a Pull Request**
-   - It can't get better then this, your pull request will be appreciated by the community.
-
-Happy coding!
+</body>

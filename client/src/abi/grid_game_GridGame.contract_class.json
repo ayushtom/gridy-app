@@ -1,0 +1,646 @@
+[
+  {
+    "type": "impl",
+    "name": "GridGame",
+    "interface_name": "grid_game::interface::IGridGame"
+  },
+  {
+    "type": "struct",
+    "name": "core::integer::u256",
+    "members": [
+      { "name": "low", "type": "core::integer::u128" },
+      { "name": "high", "type": "core::integer::u128" }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "core::array::Span::<core::felt252>",
+    "members": [
+      { "name": "snapshot", "type": "@core::array::Array::<core::felt252>" }
+    ]
+  },
+  {
+    "type": "enum",
+    "name": "core::bool",
+    "variants": [
+      { "name": "False", "type": "()" },
+      { "name": "True", "type": "()" }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "grid_game::helpers::types::block_status",
+    "members": [
+      { "name": "block_id", "type": "core::felt252" },
+      { "name": "open_status", "type": "core::bool" },
+      {
+        "name": "user",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "wadray::wadray::Wad",
+    "members": [{ "name": "val", "type": "core::integer::u128" }]
+  },
+  {
+    "type": "struct",
+    "name": "grid_game::helpers::types::neighbour_map",
+    "members": [
+      {
+        "name": "user",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      { "name": "block_id", "type": "core::felt252" }
+    ]
+  },
+  {
+    "type": "struct",
+    "name": "core::array::Span::<grid_game::helpers::types::neighbour_map>",
+    "members": [
+      {
+        "name": "snapshot",
+        "type": "@core::array::Array::<grid_game::helpers::types::neighbour_map>"
+      }
+    ]
+  },
+  {
+    "type": "interface",
+    "name": "grid_game::interface::IGridGame",
+    "items": [
+      {
+        "type": "function",
+        "name": "enable_contract",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "disable_contract",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "update_gemstone_locations",
+        "inputs": [
+          { "name": "game_id", "type": "core::integer::u128" },
+          { "name": "location_root", "type": "core::felt252" }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "start_new_game",
+        "inputs": [
+          { "name": "gemstone_location", "type": "core::felt252" },
+          { "name": "total_gemstones", "type": "core::integer::u128" },
+          { "name": "x_dimension", "type": "core::integer::u128" },
+          { "name": "y_dimension", "type": "core::integer::u128" },
+          { "name": "z_dimension", "type": "core::integer::u128" }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "set_payment_token",
+        "inputs": [
+          {
+            "name": "token_address",
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "set_price_bump_threshold",
+        "inputs": [{ "name": "threshold", "type": "core::integer::u128" }],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "withdraw_dev_pool",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "update_pricing",
+        "inputs": [{ "name": "price", "type": "core::integer::u256" }],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "mine",
+        "inputs": [
+          {
+            "name": "batched_blocks",
+            "type": "core::array::Span::<core::felt252>"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "claim_gemstone",
+        "inputs": [
+          { "name": "proof", "type": "core::array::Span::<core::felt252>" },
+          { "name": "nonce", "type": "core::felt252" },
+          { "name": "game_id", "type": "core::integer::u128" },
+          { "name": "block_id", "type": "core::felt252" },
+          { "name": "prize", "type": "core::felt252" }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "buy_user_shovels",
+        "inputs": [{ "name": "shovels", "type": "core::integer::u128" }],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "top_up",
+        "inputs": [{ "name": "amount", "type": "core::integer::u256" }],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "liquidify_points",
+        "inputs": [
+          { "name": "number_of_points", "type": "core::integer::u128" }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "get_block_status",
+        "inputs": [{ "name": "block_id", "type": "core::felt252" }],
+        "outputs": [{ "type": "grid_game::helpers::types::block_status" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_blocks_mined",
+        "inputs": [],
+        "outputs": [{ "type": "core::integer::u128" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_total_gemstones",
+        "inputs": [],
+        "outputs": [{ "type": "core::integer::u128" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_current_game_id",
+        "inputs": [],
+        "outputs": [{ "type": "core::integer::u128" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_user_mine_count",
+        "inputs": [
+          {
+            "name": "user",
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "outputs": [{ "type": "core::integer::u128" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_total_gemstones_found",
+        "inputs": [],
+        "outputs": [{ "type": "core::integer::u128" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_user_gemstones_found",
+        "inputs": [
+          {
+            "name": "user",
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "outputs": [{ "type": "core::integer::u128" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_rewards_claimed",
+        "inputs": [],
+        "outputs": [{ "type": "core::integer::u256" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_existing_price",
+        "inputs": [{ "name": "shovels", "type": "core::integer::u128" }],
+        "outputs": [{ "type": "wadray::wadray::Wad" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_gemstone_locations",
+        "inputs": [{ "name": "game_id", "type": "core::integer::u128" }],
+        "outputs": [{ "type": "core::felt252" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_user_pending_shovels",
+        "inputs": [
+          {
+            "name": "user",
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "outputs": [{ "type": "core::integer::u128" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_contract_enabled",
+        "inputs": [],
+        "outputs": [{ "type": "core::bool" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_points_count",
+        "inputs": [
+          {
+            "name": "player",
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "outputs": [{ "type": "core::integer::u256" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_total_points",
+        "inputs": [],
+        "outputs": [{ "type": "core::integer::u256" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_dev_pool",
+        "inputs": [],
+        "outputs": [{ "type": "wadray::wadray::Wad" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_prize_pool",
+        "inputs": [],
+        "outputs": [{ "type": "wadray::wadray::Wad" }],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "view_neighbours_from_block",
+        "inputs": [{ "name": "block_id", "type": "core::felt252" }],
+        "outputs": [
+          {
+            "type": "core::array::Span::<grid_game::helpers::types::neighbour_map>"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "get_points_value",
+        "inputs": [
+          { "name": "number_of_points", "type": "core::integer::u128" }
+        ],
+        "outputs": [{ "type": "wadray::wadray::Wad" }],
+        "state_mutability": "view"
+      }
+    ]
+  },
+  {
+    "type": "impl",
+    "name": "UpgradeableImpl",
+    "interface_name": "openzeppelin::upgrades::interface::IUpgradeable"
+  },
+  {
+    "type": "interface",
+    "name": "openzeppelin::upgrades::interface::IUpgradeable",
+    "items": [
+      {
+        "type": "function",
+        "name": "upgrade",
+        "inputs": [
+          {
+            "name": "new_class_hash",
+            "type": "core::starknet::class_hash::ClassHash"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      }
+    ]
+  },
+  {
+    "type": "impl",
+    "name": "OwnableMixinImpl",
+    "interface_name": "openzeppelin::access::ownable::interface::OwnableABI"
+  },
+  {
+    "type": "interface",
+    "name": "openzeppelin::access::ownable::interface::OwnableABI",
+    "items": [
+      {
+        "type": "function",
+        "name": "owner",
+        "inputs": [],
+        "outputs": [
+          { "type": "core::starknet::contract_address::ContractAddress" }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "type": "function",
+        "name": "transfer_ownership",
+        "inputs": [
+          {
+            "name": "new_owner",
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "renounce_ownership",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "transferOwnership",
+        "inputs": [
+          {
+            "name": "newOwner",
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "type": "function",
+        "name": "renounceOwnership",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      }
+    ]
+  },
+  {
+    "type": "constructor",
+    "name": "constructor",
+    "inputs": [
+      {
+        "name": "owner",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "payment_token",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      { "name": "initial_price", "type": "core::integer::u256" }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "openzeppelin::access::ownable::ownable::OwnableComponent::OwnershipTransferred",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "previous_owner",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      },
+      {
+        "name": "new_owner",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "openzeppelin::access::ownable::ownable::OwnableComponent::OwnershipTransferStarted",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "previous_owner",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      },
+      {
+        "name": "new_owner",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "openzeppelin::access::ownable::ownable::OwnableComponent::Event",
+    "kind": "enum",
+    "variants": [
+      {
+        "name": "OwnershipTransferred",
+        "type": "openzeppelin::access::ownable::ownable::OwnableComponent::OwnershipTransferred",
+        "kind": "nested"
+      },
+      {
+        "name": "OwnershipTransferStarted",
+        "type": "openzeppelin::access::ownable::ownable::OwnableComponent::OwnershipTransferStarted",
+        "kind": "nested"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Upgraded",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "class_hash",
+        "type": "core::starknet::class_hash::ClassHash",
+        "kind": "data"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Event",
+    "kind": "enum",
+    "variants": [
+      {
+        "name": "Upgraded",
+        "type": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Upgraded",
+        "kind": "nested"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "grid_game::main::GridGame::TileMinted",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "blocks",
+        "type": "core::array::Array::<core::felt252>",
+        "kind": "key"
+      },
+      {
+        "name": "owner",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      },
+      { "name": "game_id", "type": "core::integer::u128", "kind": "key" }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "grid_game::main::GridGame::GemstoneClaimed",
+    "kind": "struct",
+    "members": [
+      { "name": "block_id", "type": "core::felt252", "kind": "key" },
+      {
+        "name": "owner",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      },
+      { "name": "game_id", "type": "core::integer::u128", "kind": "key" }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "grid_game::main::GridGame::GemstoneLocationUpdated",
+    "kind": "struct",
+    "members": [
+      { "name": "game_id", "type": "core::integer::u128", "kind": "key" },
+      { "name": "location_root", "type": "core::felt252", "kind": "key" }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "grid_game::main::GridGame::NewGameInitialized",
+    "kind": "struct",
+    "members": [
+      { "name": "game_id", "type": "core::integer::u128", "kind": "key" },
+      { "name": "location_root", "type": "core::felt252", "kind": "key" },
+      {
+        "name": "total_gemstones",
+        "type": "core::integer::u128",
+        "kind": "key"
+      },
+      { "name": "x_dimension", "type": "core::integer::u128", "kind": "key" },
+      { "name": "y_dimension", "type": "core::integer::u128", "kind": "key" },
+      { "name": "z_dimension", "type": "core::integer::u128", "kind": "key" }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "grid_game::main::GridGame::ShovelsSale",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "user",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      },
+      { "name": "shovels", "type": "core::integer::u128", "kind": "key" }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "grid_game::main::GridGame::PointsSold",
+    "kind": "struct",
+    "members": [
+      {
+        "name": "player",
+        "type": "core::starknet::contract_address::ContractAddress",
+        "kind": "key"
+      },
+      { "name": "amount", "type": "core::integer::u256", "kind": "key" }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "grid_game::main::GridGame::Event",
+    "kind": "enum",
+    "variants": [
+      {
+        "name": "OwnableEvent",
+        "type": "openzeppelin::access::ownable::ownable::OwnableComponent::Event",
+        "kind": "flat"
+      },
+      {
+        "name": "UpgradeableEvent",
+        "type": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Event",
+        "kind": "flat"
+      },
+      {
+        "name": "TileMinted",
+        "type": "grid_game::main::GridGame::TileMinted",
+        "kind": "nested"
+      },
+      {
+        "name": "GemstoneClaimed",
+        "type": "grid_game::main::GridGame::GemstoneClaimed",
+        "kind": "nested"
+      },
+      {
+        "name": "GemstoneLocationUpdated",
+        "type": "grid_game::main::GridGame::GemstoneLocationUpdated",
+        "kind": "nested"
+      },
+      {
+        "name": "NewGameInitialized",
+        "type": "grid_game::main::GridGame::NewGameInitialized",
+        "kind": "nested"
+      },
+      {
+        "name": "ShovelsSale",
+        "type": "grid_game::main::GridGame::ShovelsSale",
+        "kind": "nested"
+      },
+      {
+        "name": "PointsSold",
+        "type": "grid_game::main::GridGame::PointsSold",
+        "kind": "nested"
+      }
+    ]
+  }
+]
